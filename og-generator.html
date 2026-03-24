@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  width:1200px;height:630px;
+  background:#050505;
+  font-family:'Inter',system-ui,sans-serif;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Layered background glow */
+.glow1{
+  position:absolute;
+  top:50%;left:45%;
+  transform:translate(-50%,-50%);
+  width:700px;height:700px;
+  background:radial-gradient(circle, rgba(204,255,0,.07) 0%, transparent 60%);
+}
+.glow2{
+  position:absolute;
+  top:60%;left:60%;
+  transform:translate(-50%,-50%);
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(120,80,255,.05) 0%, transparent 60%);
+}
+
+/* Top accent */
+.top-bar{
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg, transparent 10%, #CCFF00 40%, #CCFF00 60%, transparent 90%);
+}
+
+/* Content */
+.content{
+  position:relative;z-index:1;
+  text-align:center;
+  display:flex;flex-direction:column;
+  align-items:center;gap:0;
+}
+
+.eyebrow{
+  font-size:14px;font-weight:700;letter-spacing:6px;
+  color:rgba(204,255,0,.7);text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.title{
+  font-size:120px;font-weight:900;
+  color:#fff;letter-spacing:-4px;line-height:.88;
+}
+.title .year{color:#CCFF00}
+
+.divider{
+  width:100px;height:3px;
+  background:linear-gradient(90deg, transparent, #CCFF00, transparent);
+  margin:24px 0;
+  box-shadow:0 0 20px rgba(204,255,0,.3);
+}
+
+.subtitle{
+  font-size:28px;font-weight:700;
+  color:#e8e8e8;letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.stats{
+  display:flex;gap:32px;margin-top:24px;
+}
+.stat{
+  font-size:14px;color:#555;font-weight:600;
+  letter-spacing:1px;
+}
+.stat strong{color:#CCFF00;font-weight:800}
+
+/* Category pills floating */
+.pills{
+  display:flex;gap:8px;margin-top:28px;
+  flex-wrap:wrap;justify-content:center;
+}
+.pill{
+  padding:5px 14px;border-radius:20px;
+  font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px;
+}
+.p1{background:rgba(244,114,182,.15);color:#f472b6}
+.p2{background:rgba(192,132,252,.15);color:#c084fc}
+.p3{background:rgba(34,211,238,.15);color:#22d3ee}
+.p4{background:rgba(52,211,153,.15);color:#34d399}
+.p5{background:rgba(255,159,67,.15);color:#ff9f43}
+.p6{background:rgba(239,68,68,.12);color:#ef4444}
+
+/* Bottom */
+.bottom{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:18px 56px;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid #1a1a1a;
+}
+.bottom .url{font-size:13px;color:#333;font-weight:600;letter-spacing:.5px}
+.bottom .feat{font-size:12px;color:#444;font-weight:500;letter-spacing:.5px}
+</style>
+</head>
+<body>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div class="top-bar"></div>
+
+<div class="content">
+  <div class="eyebrow">Miami Music Week</div>
+  <div class="title">MMW <span class="year">2026</span></div>
+  <div class="divider"></div>
+  <div class="subtitle">Event Directory</div>
+  <div class="stats">
+    <div class="stat"><strong>176</strong> events</div>
+    <div class="stat"><strong>6</strong> days</div>
+    <div class="stat"><strong>50+</strong> venues</div>
+    <div class="stat"><strong>March 24–29</strong></div>
+  </div>
+  <div class="pills">
+    <span class="pill p1">Festival</span>
+    <span class="pill p2">Club Night</span>
+    <span class="pill p3">Pool Party</span>
+    <span class="pill p4">Showcase</span>
+    <span class="pill p5">Industry</span>
+    <span class="pill p6">Closing Party</span>
+  </div>
+</div>
+
+<div class="bottom">
+  <span class="url">mmw-2026-directory.vercel.app</span>
+  <span class="feat">Searchable · Filterable · Day-by-Day</span>
+</div>
+
+</body>
+</html>

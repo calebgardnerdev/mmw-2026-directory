@@ -1,0 +1,16 @@
+{
+  "name": "MMW 2026 — Event Directory",
+  "short_name": "MMW 2026",
+  "description": "176 events across Miami Music Week 2026. Searchable, filterable, day-by-day.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/icon-512.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
