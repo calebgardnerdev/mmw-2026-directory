@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="MMW 2026">
 <meta name="theme-color" content="#0a0a0a">
 <meta property="og:title" content="MMW 2026 — Event Directory">
-<meta property="og:description" content="180 events across Miami Music Week 2026 — searchable, filterable, day-by-day. Curated by Caleb Gardner.">
+<meta property="og:description" content="198 events across Miami Music Week 2026 — searchable, filterable, day-by-day. Curated by Caleb Gardner.">
 <meta property="og:image" content="https://mmw-2026-directory.vercel.app/og.jpeg">
 <meta property="og:url" content="https://mmw-2026-directory.vercel.app">
 <meta property="og:type" content="website">
@@ -143,6 +143,11 @@ mark{background:rgba(204,255,0,.25);color:var(--text);border-radius:2px;padding:
 /* Donate link */
 .donate-link{display:inline-flex;align-items:center;gap:5px;background:rgba(255,45,123,.1);color:#ff2d7b;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:4px 10px;border-radius:6px;margin-top:2px;text-decoration:none;transition:background .2s;cursor:pointer;margin-left:6px}
 .donate-link:hover{background:rgba(255,45,123,.2)}
+/* Promo code badge */
+.promo-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(212,175,55,.1);color:#d4af37;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:4px 10px;border-radius:6px;margin-top:2px;cursor:pointer;transition:background .2s;margin-left:6px;border:1px dashed rgba(212,175,55,.25)}
+.promo-badge:hover{background:rgba(212,175,55,.2)}
+.promo-copied{font-size:10px;color:#d4af37;font-weight:600;opacity:0;transition:opacity .3s;margin-left:4px}
+.promo-copied.show{opacity:1}
 /* Radiate badge */
 .radiate-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,rgba(255,107,53,.12),rgba(255,62,108,.12));color:#ff6b35;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:4px 10px;border-radius:6px;margin-top:2px;text-decoration:none;transition:background .2s;cursor:pointer;margin-left:6px;position:relative}
 .radiate-badge:hover{background:linear-gradient(135deg,rgba(255,107,53,.22),rgba(255,62,108,.22))}
@@ -346,6 +351,7 @@ const EVENTS = [
 {"name":"GRAVEDGR","date":"2026-03-25","start":"22:00","end":"05:00","venue":"Domicile","artists":"GRAVEDGR, Antimatter, Jill Stanley, Shay De Castro, Vessel, Technofalry","category":"Club Night","ticketUrl":"https://dice.fm/event/k692ao-miami-music-week-opning-party-25th-mar-domicile-miami-miami-tickets"},
 {"name":"Incorrect Music Showcase (MMW 2026)","date":"2026-03-25","start":"22:00","end":"05:00","venue":"MODE Miami, 2 S Miami Ave","artists":"Anthony Attalla, Carlo Lio, Cristoph, Dabura, Dillon Nathaniel, Lefti, Lexlay, Marco Lys, Siwell, Technasia","category":"Showcase","ticketUrl":"https://dice.fm/event/mxll2l-incorrect-music-showcase-mmw-2026-25th-mar-mode-miami-tickets"},
 {"name":"Trifecta Records Label Showcase","date":"2026-03-25","start":"22:00","end":"05:00","venue":"MITA","artists":"Beck VM, Eddy M, HERRERA, Joe Vanditti, Misha, Tomi & Kesh, M.O.E, Valvee","category":"Showcase"},
+{"name":"Perreo Del Futuro Presents: Six Sex","date":"2026-03-25","start":"23:00","end":"04:00","venue":"The Ground, 34 NE 11th St","artists":"Six Sex, PETERBLUE, SATURNSARii, p1no","category":"Club Night","ticketUrl":"https://dice.fm/event/av3392-perreo-del-futuro-presents-six-sex-miami-music-week-25th-mar-the-ground-miami-miami-tickets"},
 {"name":"⚡ Hugel's Make The Girls Dance","date":"2026-03-25","start":"23:00","end":"08:00","venue":"Space Miami","artists":"Hugel","category":"Club Night","ticketUrl":"https://dice.fm/event/v3q2vd-hugels-make-the-girls-dance-miami-music-week-2026-25th-mar-club-space-miami-miami-tickets"},
 {"name":"Carlita + LP Giobbi","date":"2026-03-25","start":"23:30","end":"05:00","venue":"LIV Nightclub","artists":"Carlita, LP Giobbi","category":"Club Night","ticketUrl":"https://www.livnightclub.com/miami/special-events/miami-music-week-2026/"},
 {"name":"Winter Music Conference Day 3 of 3","date":"2026-03-26","start":"12:00","end":"18:00","venue":"Kimpton EPIC Hotel","artists":"Panels, keynotes, workshops · Dirtybird A&R, Ultra Records A&R, Beatport presents Sara Landry · See wintermusicconference.com","category":"Conference","multi":"WMC","dayOf":3,"totalDays":3,"ticketUrl":"https://wintermusicconference.com/badges/"},
@@ -356,6 +362,8 @@ const EVENTS = [
 {"name":"Defected Miami (Sagamore Day 2)","date":"2026-03-26","start":"13:00","end":"23:00","venue":"Sagamore Hotel Pool","artists":"Andrea Oliva, HoneyLuv, Melé, Nic Fanciulli, Olive F, Kellie Allen, Ms. Mada","category":"Pool Party","ticketUrl":"https://www.sagamorepoolparty.com"},
 {"name":"Purple Tea Records x DTLA x Psych Drop","date":"2026-03-26","start":"13:00","end":"19:00","venue":"Cucu's Nest Bar","artists":"Above Ground, GT_OFICE, Lauren Mayhew, Matthew Topper","category":"Showcase"},
 {"name":"RAW CUTS MMW: DJ Tennis + Gerd Janson","radiate":true,"date":"2026-03-26","start":"15:00","end":"22:00","venue":"Reserve Padel, 1000 MacArthur Causeway, Watson Island","artists":"DJ Tennis, Gerd Janson, Bakke (resident), Mai Iachetti · Open-air waterfront sunset sets on glass padel courts · No phones · $39.99 · 21+","category":"Showcase","ticketUrl":"https://shotgun.live/en/web/events/raw-cuts-mmw","credit":"Stage Management: Kayla Lashley"},
+{"name":"Beatport Live Pool Party: Hot Creations x TSZR","date":"2026-03-26","start":"15:00","end":"22:00","venue":"Kimpton EPIC Hotel Pool","artists":"Jamie Jones, Lee Foss, Skream b2b L.P., Sidney Charles, Fleur Shore, Airrica","category":"Pool Party","ticketUrl":"https://dice.fm/event/bb387o-beatport-live-pool-party-hot-creations-x-tszr-26th-mar-kimpton-epic-hotel-miami-tickets"},
+{"name":"Bedrock Sunset Cruise: John Digweed & Spencer Brown","date":"2026-03-26","start":"15:30","end":"20:00","venue":"South Beach Lady (Hyatt Regency Dock)","artists":"John Digweed, Spencer Brown","category":"Showcase","ticketUrl":"https://dice.fm/event/xe6nnm-bedrock-sunset-cruise-john-digweed-spencer-brown-26th-mar-south-beach-lady-miami-tickets"},
 {"name":"Bassrush Miami Music Week","date":"2026-03-26","start":"15:00","end":"21:00","venue":"RC Cola Plant, 550 NW 24th St","artists":"Liquid Stranger, Jessica Audiffred, LAYZ, Sippy, Vicky B, Big Florida · Insomniac","category":"Showcase","ticketUrl":"https://dice.fm/event/l89pol-bassrush-miami-music-week-26th-mar-rc-cola-plant-miami-tickets","credit":"Insomniac · Bassrush"},
 {"name":"Toolroom Miami Open Air","date":"2026-03-26","start":"15:00","end":"00:00","venue":"Wynwood Marketplace","artists":"Cassimm, Chus & Ceballos, Crusy, Essel, Hatiras","category":"Showcase"},
 {"name":"Rvdiovctive x Groove Factory x Clique Cabana","date":"2026-03-26","start":"16:00","end":"00:00","venue":"Coyo Taco","artists":"Abbott, Alex Cecil, Arnich, Caroline, Delamare","category":"Showcase"},
@@ -372,6 +380,8 @@ const EVENTS = [
 {"name":"MMW at Mad Radio: Radio Slave","date":"2026-03-26","start":"21:00","end":"03:00","venue":"Mad Radio","artists":"Radio Slave, eveava","category":"Club Night"},
 {"name":"Mumbo Jumbo: Rebolledo, Esquivel, Manumat","date":"2026-03-26","start":"21:00","end":"04:00","venue":"LION'S DEN","artists":"Rebolledo, Esquivel, Manumat","category":"Club Night"},
 {"name":"Hood Politics @ 1-800-Lucky","date":"2026-03-26","start":"21:00","end":"","venue":"1-800-Lucky, 143 NW 23rd St","artists":"DJ Susan + Hood Politics roster","category":"Club Night","free":true,"rsvpUrl":"https://www.eventbrite.com/e/1-800-hood-poli-miami-music-week-tickets-1978158682871"},
+{"name":"Cosmic Gate & Friends","date":"2026-03-26","start":"21:00","end":"05:00","venue":"CLUTCH, 2250 NW 2nd Ave","artists":"Cosmic Gate, Estiva, Pretty Pink, Luccio, Anunnakis","category":"Club Night","ticketUrl":"https://dice.fm/event/mx86bw-cosmic-gate-26th-mar-clutch-miami-tickets"},
+{"name":"DEADBEATS: 10 Year Anniversary","date":"2026-03-26","start":"21:00","end":"05:00","venue":"MANA Wynwood","artists":"Zeds Dead b2b Tape B, PeekaBoo b2b LYNY, Boogie T b2b District Motive, Mary Droppinz b2b Sippy, Kill Safari, Casey Club b2b Nuemonic, AYCH b2b Overeazy","category":"Showcase","ticketUrl":"https://www.tixr.com/groups/blnkcnvs/events/deadbeats-10-year-anniversary-169701"},
 {"name":"Infected Mushroom + John 00 Fleming","date":"2026-03-26","start":"21:00","end":"05:00","venue":"Mazuma","artists":"Infected Mushroom, John 00 Fleming","category":"Club Night","ticketUrl":"https://dice.fm/event/oegg5y-infected-mushroom-john-00-fleming-26th-mar-mazuma-miami-tickets"},
 {"name":"WHOLE NEW VIBE 2","date":"2026-03-26","start":"11:00","end":"21:00","venue":"Bacon Bitch","artists":"Hatiras, DJ SEGA, DJ Immortal, Kelly Reverb","category":"Showcase"},
 {"name":"Factory Town Day 2 of 5","date":"2026-03-26","start":"22:00","end":"07:00","venue":"Factory Town","artists":"Jamie Jones, Loco Dice, MEDUZA, James Hype, Bob Sinclar, Hot Since 82 b2b Max Dean, Archie Hamilton, Adrián Mills, SOSA, Fleur Shore, Miluhska, Cole Knight · Insomniac","category":"Festival","multi":"Factory Town","dayOf":2,"totalDays":5,"ticketUrl":"https://dice.fm/event/mx326k-factory-town-music-week-2026-thursday-pass-26th-mar-factory-town-miami-tickets"},
@@ -385,6 +395,7 @@ const EVENTS = [
 {"name":"West Presents: Trace Amounts Miami","date":"2026-03-26","start":"22:00","end":"03:00","venue":"MAD Club Wynwood","artists":"Westend, Dave Summer, Devault, Fallon, Snooko","category":"Club Night"},
 {"name":"Interplay x Other Dimension MMW","date":"2026-03-26","start":"22:00","end":"05:00","venue":"Domicile","artists":"Alexander Popov, Anastasiia, Annie Sollange, Atrax","category":"Club Night","free":true},
 {"name":"The Disco Express: MMW Label Showcase","date":"2026-03-26","start":"22:00","end":"03:00","venue":"Miami Sound Bar","artists":"Barbara Tucker, Branqueeno, Brother Rich, Roland","category":"Showcase","free":true},
+{"name":"Cloonee presents Hellbent: MMW 2026","date":"2026-03-26","start":"23:00","end":"10:00","venue":"Club Space (Terrace)","artists":"Cloonee, Joseph Capriati, CamelPhat b2b Adam Ten, Luuk van Dijk b2b L.P., Rhythm Obskür, Cole Terrazas","category":"Club Night","ticketUrl":"https://dice.fm/event/7dply7-cloonee-presents-hellbent-miami-music-week-2026-26th-mar-club-space-miami-miami-tickets"},
 {"name":"Interplanetary Criminal + Main Phase: ATW Records","date":"2026-03-26","start":"23:00","end":"05:00","venue":"The Ground","artists":"Interplanetary Criminal, Main Phase, Azzecca, Ale Acosta","category":"Showcase","ticketUrl":"https://ra.co/events/2357024"},
 {"name":"GDB Records Presents","date":"2026-03-26","start":"23:00","end":"05:00","venue":"Floyd","artists":"AYYBO, GABSS, Millero, No Static","category":"Showcase"},
 {"name":"SHIFT Miami Day 4 of 4","radiate":true,"date":"2026-03-27","start":"11:00","end":"19:00","venue":"Clevelander South Beach","artists":"Seven Lions, Ophelia ecosystem talent","category":"Conference","multi":"SHIFT Miami","dayOf":4,"totalDays":4,"credit":"Erin Webster · SHIFT Miami","ticketUrl":"https://www.shiftmiami.com"},
@@ -412,7 +423,11 @@ const EVENTS = [
 {"name":"Factory Town Day 3 of 5","date":"2026-03-27","start":"22:00","end":"07:00","venue":"Factory Town","artists":"Green Velvet, Carlita, Skream b2b DJ Seinfeld, Hybrid Minds, Sara Landry (HEKATE stage) · Insomniac","category":"Festival","multi":"Factory Town","dayOf":3,"totalDays":5,"ticketUrl":"https://dice.fm/event/yoay3r-factory-town-music-week-2026-friday-pass-27th-mar-factory-town-miami-tickets"},
 {"name":"Francis Mercier & Amal Nemer","date":"2026-03-27","start":"22:00","end":"04:00","venue":"Jolene Sound Room","artists":"Francis Mercier, Amal Nemer, Nii Tei","category":"Club Night"},
 {"name":"Stereo Annual Showcase (MMW 2026)","date":"2026-03-27","start":"22:00","end":"05:00","venue":"MODE Miami, 2 S Miami Ave","artists":"DJ Chus, Harry Romero, Joeski, Patrick M, Supernova, Vidaloca, Yulia Niko, Amine K, Dvirnuns, Óscar de Rivera, Andrew Nak","category":"Showcase","ticketUrl":"https://dice.fm/event/3oggkx-stereo-annual-showcase-mmw-2026-27th-mar-mode-miami-tickets"},
+{"name":"Perspectives Digital x Alaya Yacht Cruise","date":"2026-03-27","start":"15:00","end":"19:00","venue":"Musette Yacht (Kaseya Center dock)","artists":"Rodriguez Jr., Sydney Blu, Darin Epsilon, Min the Universe, Alaya","category":"Showcase","ticketUrl":"https://www.beatportal.com/events/axo2jzg-perspectives-digital-x-alaya-miami-music-week-2026-luxury-yacht-cruise"},
+{"name":"Do Not Sit On MMW: LP Giobbi + Anja Schneider","date":"2026-03-27","start":"22:00","end":"05:00","venue":"Do Not Sit on the Furniture, 423 16th St, Miami Beach","artists":"LP Giobbi, Anja Schneider, Emjie, Le Cheu, Eveava, Alan Amorozzo","category":"Club Night","ticketUrl":"https://dice.fm/event/6dnyd2-do-not-sit-on-mmw-lp-giobbi-27th-mar-do-not-sit-on-the-furniture-miami-beach-tickets"},
 {"name":"RESISTANCE Day 3 of 5","date":"2026-03-27","start":"22:00","end":"05:00","venue":"M2","artists":"Amelie Lens, Boys Noize, ØTTA","category":"Club Night","multi":"RESISTANCE","dayOf":3,"totalDays":5,"ticketUrl":"https://resistancemiami.com"},
+{"name":"Yoyaku x SlapFunk: Miami Music Week","date":"2026-03-27","start":"23:00","end":"05:00","venue":"Floyd","artists":"Danny Daze, DJ SENC, GARETT DAVID, Krol, Paramida","category":"Club Night","ticketUrl":"https://dice.fm/event/bbkkwk-yoyaku-x-slapfunk-miami-music-week-27th-mar-floyd-miami-miami-tickets"},
+{"name":"Where Are My Keys? (Day 1 of 3)","date":"2026-03-27","start":"23:59","end":"10:00","venue":"94th Aero Squadron, 1395 NW 57th Ave","artists":"Ricardo Villalobos, Danny Daze, Fumiya Tanaka, tINI, Shaun Reeves, Paramida, Krol, Ohm Hourani + more","category":"Club Night","multi":"Where Are My Keys?","dayOf":1,"totalDays":3,"ticketUrl":"https://dice.fm/event/dkqbaq-where-are-my-keys-mmw-by-unmute-pickle-27th-mar-94th-aero-squadron-miami-tickets"},
 {"name":"JVNGLA Miami","date":"2026-03-27","start":"22:00","end":"","venue":"Electric Lady Miami","artists":"TBA","category":"Club Night","free":true,"rsvpUrl":"https://dice.fm/bundles/miami-music-week-events-55yy"},
 {"name":"Cadenza Hi-Fi: Something Chill","date":"2026-03-27","start":"22:00","end":"","venue":"Cadenza Hi-Fi, Miami","artists":"TBA · Listening bar showcase","category":"Showcase","free":true,"rsvpUrl":"https://dice.fm/bundles/miami-music-week-events-55yy"},
 {"name":"Witty Tunes Showcase: Edd & Friends","date":"2026-03-27","start":"22:00","end":"","venue":"Astra Miami","artists":"Edd + Friends","category":"Showcase","free":true,"rsvpUrl":"https://dice.fm/bundles/miami-music-week-events-55yy"},
@@ -449,7 +464,12 @@ const EVENTS = [
 {"name":"Valentino Khan & Friends Miami","date":"2026-03-28","start":"22:00","end":"03:00","venue":"MAD Club Wynwood","artists":"Valentino Khan, DJ Susan, Marten Hørger, OKAYVAL, Proppa","category":"Club Night"},
 {"name":"Cristobal Pesce US Debut","date":"2026-03-28","start":"22:00","end":"07:00","venue":"Domicile","artists":"Cristobal Pesce, Gioh Cecato, Jay Toledo, Ketting","category":"Club Night"},
 {"name":"GORDO","date":"2026-03-28","start":"22:00","end":"05:00","venue":"RC Cola Plant","artists":"Gordo","category":"Club Night"},
+{"name":"Anjunadeep Open Air Miami","date":"2026-03-28","start":"16:00","end":"00:00","venue":"Wynwood Marketplace, 220 NW 26th St","artists":"Amtrac, Because of Art, CRi, Dosem b2b HANA, Eli & Fur, Eric Luttrell, Ezequiel Arias, Rezident","category":"Showcase","ticketUrl":"https://www.tixr.com/groups/blnkcnvs/events/anjunadeep-open-air-miami-126015"},
+{"name":"No Art Music (ANOTR & Friends)","date":"2026-03-28","start":"17:00","end":"02:00","venue":"Little River Studios, 300 NE 71st St","artists":"ANOTR + full No Art roster TBA","category":"Showcase","ticketUrl":"https://dice.fm/event/6d2vo7-no-art-music-28th-mar-little-river-studios-miami-tickets"},
+{"name":"CV FREQS: Modular Synth Party","date":"2026-03-28","start":"20:00","end":"02:00","venue":"Carolina Sardi Studio, Wynwood","artists":"ALX-106, Mei, Eden Grey, Jorge Barr + more","category":"Showcase","free":true},
+{"name":"MMW at Mad Radio: Roy Davis Jr.","date":"2026-03-28","start":"21:00","end":"03:00","venue":"Mad Radio, 7700 Biscayne Blvd","artists":"Roy Davis Jr., Atomyard b2b Penny Lane, Leo Del Toro","category":"Club Night","ticketUrl":"https://shotgun.live/en/events/mmw-at-mad-radio-demarkus-lewis-atom-yard-leo-del-toro"},
 {"name":"RESISTANCE Day 4 of 5","date":"2026-03-28","start":"22:00","end":"05:00","venue":"M2","artists":"Boris Brejcha, Miss Monique, Brina Knauss","category":"Club Night","multi":"RESISTANCE","dayOf":4,"totalDays":5,"ticketUrl":"https://resistancemiami.com"},
+{"name":"Where Are My Keys? (Day 2 of 3)","date":"2026-03-28","start":"23:59","end":"10:00","venue":"94th Aero Squadron, 1395 NW 57th Ave","artists":"Ricardo Villalobos + full roster","category":"Club Night","multi":"Where Are My Keys?","dayOf":2,"totalDays":3,"ticketUrl":"https://dice.fm/event/dkqbaq-where-are-my-keys-mmw-by-unmute-pickle-27th-mar-94th-aero-squadron-miami-tickets"},
 {"name":"Marco Carola presents Music On","date":"2026-03-28","start":"23:00","end":"22:00","venue":"Space Miami","artists":"Marco Carola","category":"Club Night"},
 {"name":"Innellea","date":"2026-03-28","start":"23:00","end":"05:00","venue":"Floyd","artists":"Innellea, Layla Benitez, Max Stern","category":"Club Night"},
 {"name":"ZeyZey x Fool's Gold: A-Trak & Friends","date":"2026-03-28","start":"23:00","end":"04:00","venue":"ZeyZey","artists":"A-Trak, Dennis Ferrer, DJ Slugo, Illyus & Barrientos, Monty Kiddo","category":"Club Night"},
@@ -482,6 +502,9 @@ const EVENTS = [
 {"name":"Elrow Miami / Factory Town Day 5 of 5","date":"2026-03-29","start":"22:00","end":"07:00","venue":"Factory Town","artists":"Patrick Topping, Sonny Fodera, Matroda, LP Giobbi, Ilario Alicante, I Hate Models, Indira Paganotto, Nico Moreno, ChaseWest, Max Styler, Olive F, Jay de Lys · Insomniac","category":"Festival","multi":"Factory Town","dayOf":5,"totalDays":5,"ticketUrl":"https://www.factorytown.com/factory-town-music-week-2026/"},
 {"name":"Swimming Paul at Midline","date":"2026-03-29","start":"22:00","end":"03:00","venue":"MIDLINE MIAMI","artists":"Swimming Paul, Angrybaby, DCAL, ME N Ü, Will Sass","category":"Club Night"},
 {"name":"RESISTANCE Day 5 of 5 (Closing)","date":"2026-03-29","start":"22:00","end":"05:00","venue":"M2","artists":"Carl Cox, Maceo Plex, Airrica · RESISTANCE x Ultra Worldwide","category":"Closing Party","multi":"RESISTANCE","dayOf":5,"totalDays":5,"ticketUrl":"https://resistancemiami.com"},
+{"name":"Maceo Plex: MMW Closing","date":"2026-03-29","start":"23:00","end":"06:00","venue":"Jolene Sound Room","artists":"Maceo Plex, Bakke b2b Jonny From Space + special guest","category":"Closing Party","ticketUrl":"https://dice.fm/venue/jolene-sound-room-miami-97a6"},
+{"name":"III Points Presents: Miami Music Week Closing","date":"2026-03-29","start":"23:00","end":"06:00","venue":"The Ground, 34 NE 11th St","artists":"Danny Daze b2b Phoenecia, 1-800-305-619!, CoffinTexts b2b Eco-Sistema, Lotusoph b2b Milo Ziro, Pressure Point b2b Sel","category":"Closing Party","ticketUrl":"https://dice.fm/bundles/miami-music-week-events-55yy"},
+{"name":"Where Are My Keys? (Day 3 of 3)","date":"2026-03-29","start":"23:59","end":"10:00","venue":"94th Aero Squadron, 1395 NW 57th Ave","artists":"Ricardo Villalobos + full roster · Sarahtonin's 5-Year Anniversary","category":"Closing Party","multi":"Where Are My Keys?","dayOf":3,"totalDays":3,"ticketUrl":"https://dice.fm/event/dkqbaq-where-are-my-keys-mmw-by-unmute-pickle-27th-mar-94th-aero-squadron-miami-tickets"},
 {"name":"F93 x PIV Records","date":"2026-03-29","start":"23:00","end":"05:00","venue":"Floyd","artists":"Demi Riquísimo, Klaudie, Locklead, Prunk, RUZE","category":"Showcase"},
 {"name":"OUTRO — MMW Closing Party (BLNK CNVS x Monstercat)","date":"2026-03-29","start":"21:00","end":"","venue":"Mana Wynwood Convention Center","artists":"SVDDEN DEATH, Sullivan King, Ray Volpe, Adventure Club b2b AVELLO, Kompany b2b LAYZ, Nostalgix + surprise guests · Biggest bass music closer of MMW","category":"Closing Party","ticketUrl":"https://ra.co/events/2356193"},
 {"name":"Club Space 30+ Hour MMW Closing Party","date":"2026-03-29","start":"23:00","end":"","venue":"Club Space (The Terrace)","artists":"TBA · Runs Sunday night into Tuesday morning","category":"Closing Party","ticketUrl":"https://dice.fm/event/mxl5nr-30-hour-mmw-closing-party-2026-29th-mar-club-space-miami-miami-tickets"}
@@ -848,6 +871,7 @@ function renderEventCard(e,i,q,extraClasses,badgeHtml){
     </a>
     ${e.artists&&e.artists!=='TBD'?`<div class="event-artists"><strong>Artists:</strong> ${highlightFeatured(e.artists,q)}</div>`:''}
     ${e.free?`<a class="free-badge" href="${e.rsvpUrl||'#'}" target="_blank" onclick="event.stopPropagation()">✦ Free RSVP</a>`:''}${!e.free&&e.ticketUrl?`<a class="ticket-link" href="${e.ticketUrl}" target="_blank" onclick="event.stopPropagation()">🎫 Tickets</a>`:''}${e.donateUrl?`<a class="donate-link" href="${e.donateUrl}" target="_blank" onclick="event.stopPropagation()">♡ Support Femme House</a>`:''}${e.radiate?`<span class="radiate-badge" onclick="event.stopPropagation()">☀️ Join on Radiate<span class="radiate-tooltip">Chat with everyone going to this event, find your crew, and see who else is there.<br><br><a href="https://www.radiatetheworld.com" target="_blank">Open Radiate</a> — 1M+ users across 500+ festivals</span></span>`:''}
+    ${e.promo?`<span class="promo-badge" onclick="event.stopPropagation();copyPromo('${e.promo}',this)">🏷 Code: ${e.promo}<span class="promo-copied">Copied!</span></span>`:''}
     ${e.credit?`<div style="font-size:10px;color:#555;margin-top:4px;font-style:italic">${highlightFeatured(e.credit,'')}</div>`:''}
     <div class="card-details">
       ${e.multi?`<div class="detail-row"><span class="detail-label">Series</span><span>${e.multi} (Day ${e.dayOf} of ${e.totalDays})</span></div>`:''}
@@ -977,6 +1001,14 @@ function renderEvents(){
   grid.querySelectorAll('.event-card').forEach(card=>{
     card.addEventListener('click',()=>card.classList.toggle('expanded'));
   });
+}
+
+// Copy promo code to clipboard
+function copyPromo(code,el){
+  navigator.clipboard.writeText(code).then(()=>{
+    const msg=el.querySelector('.promo-copied');
+    if(msg){msg.classList.add('show');setTimeout(()=>msg.classList.remove('show'),1500)}
+  }).catch(()=>{});
 }
 
 // Going tab renderer
