@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="MMW 2026">
 <meta name="theme-color" content="#0a0a0a">
 <meta property="og:title" content="MMW 2026 — Event Directory">
-<meta property="og:description" content="176 events across Miami Music Week 2026 — searchable, filterable, day-by-day. Curated by Caleb Gardner.">
+<meta property="og:description" content="180 events across Miami Music Week 2026 — searchable, filterable, day-by-day. Curated by Caleb Gardner.">
 <meta property="og:image" content="https://mmw-2026-directory.vercel.app/og.jpeg">
 <meta property="og:url" content="https://mmw-2026-directory.vercel.app">
 <meta property="og:type" content="website">
@@ -96,8 +96,10 @@ h1 span{color:var(--accent)}
 .event-name{font-size:15px;font-weight:700;line-height:1.3;flex:1}
 .event-time{font-size:13px;color:var(--accent);font-weight:600;display:flex;align-items:center;gap:6px}
 .event-time svg{width:14px;height:14px;flex-shrink:0}
-.event-venue{font-size:13px;color:var(--text2);display:flex;align-items:center;gap:6px}
-.event-venue svg{width:14px;height:14px;flex-shrink:0;color:var(--text3)}
+.event-venue{font-size:13px;color:var(--text2);display:flex;align-items:center;gap:6px;transition:color .2s}
+a.event-venue:hover{color:var(--accent)}
+a.event-venue:hover svg{color:var(--accent)}
+.event-venue svg{width:14px;height:14px;flex-shrink:0;color:var(--text3);transition:color .2s}
 .event-artists{font-size:13px;color:var(--text2);line-height:1.5}
 .event-artists strong{color:var(--text);font-weight:500}
 
@@ -154,10 +156,71 @@ mark{background:rgba(204,255,0,.25);color:var(--text);border-radius:2px;padding:
 .live-dot{width:6px;height:6px;border-radius:50%;background:#ef4444;animation:pulse-live 1.5s ease-in-out infinite}
 @keyframes pulse-live{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.3)}}
 .event-card.is-live{border:1px solid rgba(239,68,68,.3)}
+/* Past event dimming */
+.event-card.is-past{opacity:.45;filter:saturate(.5);transition:opacity .3s,filter .3s}
+.event-card.is-past:hover{opacity:.7;filter:saturate(.7)}
+/* Section dividers */
+.section-divider{grid-column:1/-1;padding:20px 0 8px;display:flex;align-items:center;gap:12px}
+.section-divider h3{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;white-space:nowrap}
+.section-divider .line{flex:1;height:1px;background:var(--border)}
+.section-divider.now h3{color:#ef4444}
+.section-divider.upcoming h3{color:var(--accent)}
+.section-divider.past h3{color:var(--text3)}
+/* Next Up badge */
+.next-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--accent);padding:3px 8px;border-radius:4px;background:rgba(204,255,0,.1);margin-left:8px}
+/* Tab live dot */
+.tab-live{display:inline-flex;align-items:center;gap:4px;margin-left:4px}
+.tab-live-dot{width:6px;height:6px;border-radius:50%;background:#ef4444;display:inline-block;animation:pulse-live 1.5s ease-in-out infinite}
+.tab-live-count{font-size:10px;color:#ef4444;font-weight:700}
+/* All ended message */
+.all-ended{grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--text3)}
+.all-ended h3{font-size:18px;color:var(--text2);margin-bottom:6px}
+/* Going button on cards */
+.going-btn{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface2);color:var(--text3);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10;line-height:1}
+.going-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(204,255,0,.08)}
+.going-btn.is-going{background:var(--accent);color:#000;border-color:var(--accent);font-size:14px}
+/* Going tab special style */
+.tab.going-tab{border:1px solid var(--accent);color:var(--accent)}
+.tab.going-tab.active{background:var(--accent);color:#000}
+/* Going empty state */
+.going-empty{grid-column:1/-1;text-align:center;padding:60px 20px}
+.going-empty h3{font-size:20px;color:var(--text2);margin-bottom:8px}
+.going-empty p{color:var(--text3);font-size:14px;line-height:1.6}
+/* Share bar */
+.share-bar{grid-column:1/-1;display:flex;gap:8px;align-items:center;padding:8px 0 12px;flex-wrap:wrap}
+.share-btn{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;border:1px solid var(--accent);background:rgba(204,255,0,.08);color:var(--accent);cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.share-btn:hover{background:var(--accent);color:#000}
+.share-msg{font-size:12px;color:var(--accent);font-weight:600;opacity:0;transition:opacity .3s}
+.share-msg.show{opacity:1}
+/* Submit event button */
+.submit-event-btn{padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;border:1px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;transition:all .2s;text-transform:uppercase;letter-spacing:.5px}
+.submit-event-btn:hover{border-color:var(--accent);color:var(--accent)}
+/* Submit event modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
+.modal h2{font-size:20px;font-weight:700;margin-bottom:4px}
+.modal p.modal-sub{font-size:13px;color:var(--text3);margin-bottom:20px}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--text3);font-size:22px;cursor:pointer;padding:4px}
+.modal-close:hover{color:var(--text)}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);margin-bottom:5px}
+.form-group input,.form-group select{width:100%;padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus{border-color:var(--accent)}
+.form-group input::placeholder{color:var(--text3)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.form-submit{width:100%;padding:12px;border-radius:10px;font-size:14px;font-weight:700;border:none;background:var(--accent);color:#000;cursor:pointer;transition:opacity .2s;margin-top:8px}
+.form-submit:hover{opacity:.9}
+.form-submit:disabled{opacity:.5;cursor:not-allowed}
+.form-success{text-align:center;padding:20px 0}
+.form-success h3{color:var(--accent);font-size:18px;margin-bottom:8px}
+.form-success p{color:var(--text2);font-size:13px;line-height:1.6}
 /* Footer */
 .footer a{color:var(--accent);text-decoration:none}
 .footer a:hover{text-decoration:underline}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 
@@ -177,6 +240,47 @@ mark{background:rgba(204,255,0,.25);color:var(--text);border-radius:2px;padding:
 
   <nav class="tabs" id="tabs"></nav>
   <main class="events-grid" id="eventsGrid"></main>
+</div>
+
+<!-- Submit Event Modal -->
+<div class="modal-overlay" id="submitModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div id="submitFormView">
+      <h2>Submit an Event</h2>
+      <p class="modal-sub">Add an event to your Going list instantly. We'll review it for the public directory.</p>
+      <form id="submitEventForm">
+        <div class="form-group"><label>Event name *</label><input type="text" id="se-name" placeholder="e.g. Disclosure Pool Party" required></div>
+        <div class="form-row">
+          <div class="form-group"><label>Date *</label><input type="date" id="se-date" min="2026-03-24" max="2026-03-29" required></div>
+          <div class="form-group"><label>Category</label>
+            <select id="se-category"><option value="Club Night">Club Night</option><option value="Pool Party">Pool Party</option><option value="Showcase">Showcase</option><option value="Festival">Festival</option><option value="Conference">Conference</option><option value="Industry">Industry</option><option value="Sunrise/Afterparty">Sunrise/Afterparty</option><option value="Closing Party">Closing Party</option></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Start time</label><input type="time" id="se-start"></div>
+          <div class="form-group"><label>End time</label><input type="time" id="se-end"></div>
+        </div>
+        <div class="form-group"><label>Venue *</label><input type="text" id="se-venue" placeholder="e.g. Surfcomber Hotel Pool" required></div>
+        <div class="form-group"><label>Artists / Lineup</label><input type="text" id="se-artists" placeholder="e.g. Disclosure, Hayden James, Cassian"></div>
+        <div class="form-group"><label>Ticket / RSVP link</label><input type="url" id="se-link" placeholder="https://..."></div>
+        <div class="form-row">
+          <div class="form-group"><label>Free event?</label>
+            <select id="se-free"><option value="no">No</option><option value="yes">Yes / Free RSVP</option></select>
+          </div>
+          <div class="form-group"><label>Your name (optional)</label><input type="text" id="se-submitter" placeholder="So we can credit you"></div>
+        </div>
+        <button type="submit" class="form-submit">Add to My List & Submit for Review</button>
+      </form>
+    </div>
+    <div id="submitSuccessView" style="display:none">
+      <div class="form-success">
+        <h3>Event added to your Going list!</h3>
+        <p>It's on your personal schedule now. We'll review it and add it to the public directory if it checks out.</p>
+        <button class="form-submit" style="margin-top:16px" onclick="document.getElementById('submitModal').classList.remove('open')">Done</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer class="footer">
@@ -208,6 +312,7 @@ const EVENTS = [
 {"name":"Brainjack Records Takeover","radiate":true,"date":"2026-03-24","start":"21:00","end":"02:00","venue":"Clevelander South Beach (Pool Patio)","artists":"Wenzday, Damon Sharpe, SPACEWALK, Cerulo, Patrick Coles","category":"Club Night","free":true,"rsvpUrl":"https://www.tixr.com/groups/clevelander/events/brain-jack-label-takeover-03-24-180225"},
 {"name":"Rum & Bass: Walshy Fire","date":"2026-03-24","start":"21:00","end":"02:00","venue":"Coyo Taco, 2300 NW 2nd Ave","artists":"Walshy Fire (Major Lazer)","category":"Club Night","free":true,"rsvpUrl":"https://www.eventbrite.com/e/rum-bass-tickets-1979842222383"},
 {"name":"Beatport Live Pool Party x Mood Child","date":"2026-03-24","start":"17:00","end":"22:00","venue":"Epic Hotel Pool","artists":"DJ Sneak, Jean Pierre, Manda Moor, Ms. Mada, Sirus Hood","category":"Pool Party"},
+{"name":"RAW CUTS: Prospa b2b Josh Baker","date":"2026-03-24","start":"18:00","end":"23:00","venue":"SkateBird Miami, 533 NE 83rd St","artists":"Prospa b2b Josh Baker, William Kiss + special guest · RAW CUTS · 21+","category":"Showcase","ticketUrl":"https://shotgun.live/en/events/rawcuts-prospa-mmw","credit":"RAW CUTS"},
 {"name":"Welcome to Miami Music Week","date":"2026-03-24","start":"19:00","end":"03:00","venue":"Tipsy Flamingo Cocktail Bar","artists":"Freshcobar, Gadjet, JAMESON, Jay-J, KASH, Lavelle Dupree, Lujan, Scotty Boy, Stellar","category":"Club Night"},
 {"name":"Miami Music Week at E11EVEN: Benjamin Lloyd","date":"2026-03-24","start":"20:00","end":"10:00","venue":"E11EVEN MIAMI","artists":"Benjamin Lloyd, Ben Gindhardt, Brooke Brazelton","category":"Club Night","ticketUrl":"https://speakeasygo.com/E11EVEN/MIAMI-MUSIC-WEEK-AT-E11EVEN%3A-BENJAMIN-LLOYD?eid=EVE-SZ6VC1"},
 {"name":"Monrroe + Sustance MMW","date":"2026-03-24","start":"21:00","end":"03:00","venue":"Mazuma","artists":"Monrroe, Sustance","category":"Club Night","ticketUrl":"https://shotgun.live/en/events/monrroe-sustance-mmw"},
@@ -251,12 +356,14 @@ const EVENTS = [
 {"name":"Defected Miami (Sagamore Day 2)","date":"2026-03-26","start":"13:00","end":"23:00","venue":"Sagamore Hotel Pool","artists":"Andrea Oliva, HoneyLuv, Melé, Nic Fanciulli, Olive F, Kellie Allen, Ms. Mada","category":"Pool Party","ticketUrl":"https://www.sagamorepoolparty.com"},
 {"name":"Purple Tea Records x DTLA x Psych Drop","date":"2026-03-26","start":"13:00","end":"19:00","venue":"Cucu's Nest Bar","artists":"Above Ground, GT_OFICE, Lauren Mayhew, Matthew Topper","category":"Showcase"},
 {"name":"RAW CUTS MMW: DJ Tennis + Gerd Janson","radiate":true,"date":"2026-03-26","start":"15:00","end":"22:00","venue":"Reserve Padel, 1000 MacArthur Causeway, Watson Island","artists":"DJ Tennis, Gerd Janson, Bakke (resident), Mai Iachetti · Open-air waterfront sunset sets on glass padel courts · No phones · $39.99 · 21+","category":"Showcase","ticketUrl":"https://shotgun.live/en/web/events/raw-cuts-mmw","credit":"Stage Management: Kayla Lashley"},
+{"name":"Bassrush Miami Music Week","date":"2026-03-26","start":"15:00","end":"21:00","venue":"RC Cola Plant, 550 NW 24th St","artists":"Liquid Stranger, Jessica Audiffred, LAYZ, Sippy, Vicky B, Big Florida · Insomniac","category":"Showcase","ticketUrl":"https://dice.fm/event/l89pol-bassrush-miami-music-week-26th-mar-rc-cola-plant-miami-tickets","credit":"Insomniac · Bassrush"},
 {"name":"Toolroom Miami Open Air","date":"2026-03-26","start":"15:00","end":"00:00","venue":"Wynwood Marketplace","artists":"Cassimm, Chus & Ceballos, Crusy, Essel, Hatiras","category":"Showcase"},
 {"name":"Rvdiovctive x Groove Factory x Clique Cabana","date":"2026-03-26","start":"16:00","end":"00:00","venue":"Coyo Taco","artists":"Abbott, Alex Cecil, Arnich, Caroline, Delamare","category":"Showcase"},
 {"name":"FRESH SQUEEZE","date":"2026-03-26","start":"18:00","end":"21:00","venue":"Limonada","artists":"Big Body Kito, Riva + Bianca, Sunday Double","category":"Showcase"},
 {"name":"Nora En Pure Presents Purified Miami","date":"2026-03-26","start":"19:00","end":"00:00","venue":"Jungle Island","artists":"Nora En Pure, Dosem, Eli & Fur, Fideles, Jack Emery, Corren Cavini · Open-air tropical setting","category":"Pool Party","ticketUrl":"https://dice.fm/event/v3qvdv-nora-en-pure-presents-purified-miami-26th-mar-jungle-island-miami-tickets"},
 {"name":"Gorgon City Presents: Enter the Realm","radiate":true,"date":"2026-03-26","start":"20:00","end":"04:00","venue":"Toe Jam Backlot","artists":"Gorgon City, SG Lewis, Azzecca, Jackie Hollander, Silva Bumpa · Phase 3 / Casa Alta · The Diskonect · Third Eye Hospitality","category":"Festival","multi":"Toe Jam","dayOf":1,"totalDays":4,"ticketUrl":"https://dice.fm/event/bb3nlv-gorgon-city-presents-enter-the-realm-miami-26th-mar-toe-jam-backlot-miami-tickets","credit":"Presented by Phase 3 · @phase3presents"},
 {"name":"PARDON MY FRENCH","radiate":true,"date":"2026-03-26","start":"20:00","end":"03:00","venue":"Toe Jam XL","artists":"DJ Snake b2b A-Trak, Dillon Francis b2b Flosstradamus, Hamdi w/ Flowdan, Troy Boi, Trym, Chuwe, No Signal, Frosttop, REMK · Phase 3 / Casa Alta · The Diskonect · Third Eye Hospitality","category":"Festival","ticketUrl":"https://dice.fm/event/ry92nq-pardon-my-french-miami-music-week-26th-mar-toe-jam-xl-miami-tickets","credit":"Presented by Phase 3 · @phase3presents"},
+{"name":"Miami Music Week at E11EVEN: deadmau5","date":"2026-03-26","start":"20:00","end":"10:00","venue":"E11EVEN MIAMI","artists":"deadmau5, EDX, Raiden, Stellar","category":"Club Night","ticketUrl":"https://speakeasygo.com/E11EVEN/MIAMI-MUSIC-WEEK-AT-E11EVEN:-deadmau5?eid=EVE-0A3CYJ"},
 {"name":"Kazbah Showcase","date":"2026-03-26","start":"20:00","end":"02:00","venue":"ZeyZey","artists":"TBD","category":"Showcase","ticketUrl":"https://ra.co/events/2349522"},
 {"name":"Ultra Naté's DEEP SUGAR MIAMI","date":"2026-03-26","start":"20:00","end":"03:00","venue":"The Triangle at Little River","artists":"Ultra Naté, Rissa Garcia, Soul Clap","category":"Club Night"},
 {"name":"Union Showcase: Peppe Citarella & Friends","date":"2026-03-26","start":"20:00","end":"04:00","venue":"Astra Rooftop Garden","artists":"Peppe Citarella, Chucho Teliz, Fabyo, Gascon","category":"Showcase"},
@@ -296,6 +403,7 @@ const EVENTS = [
 {"name":"Ministry of Sound x Hard Times","radiate":true,"date":"2026-03-27","start":"19:00","end":"03:00","venue":"Sable Miami","artists":"Dennis Ferrer, Derrick Carter, HoneyLuv b2b Fletch · Phase 3 Presents","category":"Showcase","credit":"Presented by Phase 3 · @phase3presents"},
 {"name":"Shimza and Co Miami Music Week","date":"2026-03-27","start":"19:00","end":"03:00","venue":"Jungle Island","artists":"Shimza, Bedouin, Francis Mercier, Arodes, FALYN","category":"Showcase"},
 {"name":"Black Book Records (Toe Jam Day 2 of 4)","radiate":true,"date":"2026-03-27","start":"20:00","end":"03:00","venue":"Toe Jam Backlot","artists":"Chris Lake, Eats Everything, Gio Lucca, Jackie Hollander, Marco Lys, Marco Strous, MPH, Ragie Ban · Phase 3 / Casa Alta · The Diskonect · Third Eye Hospitality","category":"Festival","multi":"Toe Jam","dayOf":2,"totalDays":4,"ticketUrl":"https://dice.fm/event/3ow9nx-black-book-records-miami-music-week-27th-mar-toe-jam-backlot-miami-tickets","credit":"Presented by Phase 3 · @phase3presents"},
+{"name":"Miami Music Week at E11EVEN: Diplo","date":"2026-03-27","start":"20:00","end":"10:00","venue":"E11EVEN MIAMI","artists":"Diplo","category":"Club Night","ticketUrl":"https://speakeasygo.com/E11EVEN/MIAMI-MUSIC-WEEK-AT-E11EVEN:-DIPLO"},
 {"name":"🧀 deadmau5: Miami Music Week","radiate":true,"date":"2026-03-27","start":"20:00","end":"04:00","venue":"Toe Jam XL","artists":"deadmau5, Hatiras, Julian Gray, Mafia B · Mau5trap · Phase 3 Presents","category":"Festival","credit":"Presented by Phase 3 · @phase3presents"},
 {"name":"Ageless, Nicolas Matar, Esquivel","date":"2026-03-27","start":"21:00","end":"04:00","venue":"LION'S DEN","artists":"Ageless, Nicolas Matar, Esquivel","category":"Club Night"},
 {"name":"Journey: Spencer Brown, Eric Luttrell, Qrion x Massane","date":"2026-03-27","start":"21:00","end":"05:00","venue":"Mazuma","artists":"Spencer Brown, Eric Luttrell, Qrion, Massane, Because of Art","category":"Club Night"},
@@ -419,6 +527,139 @@ let activeDay = 'all';
 let activeCategories = new Set();
 let searchQuery = '';
 
+// Supabase connection
+const SUPABASE_URL='https://ipncdjcqgxbkprhcekfb.supabase.co';
+const SUPABASE_KEY='sb_publishable_Murqu3GmKPHDS3PMBL0XxQ_NkF5plxk';
+const EVENT_SERIES='mmw-2026';
+let sb=null;
+try{if(window.supabase)sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY)}catch(e){console.warn('Supabase init failed, using localStorage fallback')}
+
+// Device ID — persistent anonymous identifier
+function getDeviceId(){
+  let did=localStorage.getItem('mmw-device-id');
+  if(!did){did=crypto.randomUUID();localStorage.setItem('mmw-device-id',did)}
+  return did;
+}
+const DEVICE_ID=getDeviceId();
+
+// Going list — localStorage as fast cache, Supabase as persistent backend
+function eventId(e){return e.name+'||'+e.date}
+function loadGoingList(){
+  try{const s=localStorage.getItem('mmw-going');return s?new Set(JSON.parse(s)):new Set()}catch(e){return new Set()}
+}
+function saveGoingListLocal(){
+  try{localStorage.setItem('mmw-going',JSON.stringify([...goingList]))}catch(e){}
+}
+
+// Sync going list FROM Supabase (runs once on load)
+async function syncGoingFromSupabase(){
+  if(!sb)return;
+  try{
+    const{data,error}=await sb.from('going_lists').select('event_id').eq('device_id',DEVICE_ID).eq('event_series',EVENT_SERIES);
+    if(error)throw error;
+    if(data&&data.length>0){
+      data.forEach(r=>goingList.add(r.event_id));
+      saveGoingListLocal();
+      renderTabs();renderEvents();
+    }
+  }catch(e){console.warn('Supabase sync failed:',e)}
+}
+
+// Push a going pick TO Supabase
+async function addGoingToSupabase(eid){
+  if(!sb)return;
+  try{await sb.from('going_lists').upsert({device_id:DEVICE_ID,event_series:EVENT_SERIES,event_id:eid},{onConflict:'device_id,event_series,event_id'})}catch(e){console.warn('Supabase add failed:',e)}
+}
+
+// Remove a going pick FROM Supabase
+async function removeGoingFromSupabase(eid){
+  if(!sb)return;
+  try{await sb.from('going_lists').delete().eq('device_id',DEVICE_ID).eq('event_series',EVENT_SERIES).eq('event_id',eid)}catch(e){console.warn('Supabase remove failed:',e)}
+}
+
+// Attendance counts cache
+let attendanceCounts={};
+async function loadAttendanceCounts(){
+  if(!sb)return;
+  try{
+    const{data,error}=await sb.from('event_attendance').select('event_id,going_count').eq('event_series',EVENT_SERIES);
+    if(error)throw error;
+    if(data){data.forEach(r=>{attendanceCounts[r.event_id]=r.going_count});renderEvents();}
+  }catch(e){console.warn('Attendance load failed:',e)}
+}
+
+// Custom events submitted by user (localStorage + Supabase)
+function loadCustomEvents(){
+  try{const s=localStorage.getItem('mmw-custom-events');return s?JSON.parse(s):[]}catch(e){return []}
+}
+function saveCustomEvents(){
+  try{localStorage.setItem('mmw-custom-events',JSON.stringify(customEvents))}catch(e){}
+}
+async function submitEventToSupabase(ev){
+  if(!sb)return;
+  try{
+    await sb.from('submitted_events').insert({
+      event_series:EVENT_SERIES,
+      name:ev.name,
+      date:ev.date,
+      start_time:ev.start||null,
+      end_time:ev.end||null,
+      venue:ev.venue,
+      artists:ev.artists||null,
+      category:ev.category,
+      is_free:ev.free||false,
+      ticket_url:ev.ticketUrl||null,
+      rsvp_url:ev.rsvpUrl||null,
+      submitter_name:ev._submitter||null,
+      submitter_device_id:DEVICE_ID
+    });
+  }catch(e){console.warn('Event submit failed:',e)}
+}
+
+let goingList=loadGoingList();
+let customEvents=loadCustomEvents();
+
+// Check URL for shared going list
+(function(){
+  const params=new URLSearchParams(window.location.search);
+  const shared=params.get('going');
+  if(shared){
+    try{
+      const ids=JSON.parse(decodeURIComponent(shared));
+      if(Array.isArray(ids)){
+        ids.forEach(id=>{goingList.add(id);addGoingToSupabase(id)});
+        saveGoingListLocal();
+      }
+    }catch(e){}
+    window.history.replaceState({},'',window.location.pathname);
+    activeDay='going';
+  }
+})();
+
+function toggleGoing(eid){
+  if(goingList.has(eid)){
+    goingList.delete(eid);
+    removeGoingFromSupabase(eid);
+  }else{
+    goingList.add(eid);
+    addGoingToSupabase(eid);
+  }
+  saveGoingListLocal();
+  renderTabs();
+  renderEvents();
+  // Refresh attendance after a short delay
+  setTimeout(loadAttendanceCounts,1000);
+}
+
+function getAllEvents(){
+  return [...EVENTS,...customEvents];
+}
+
+function getGoingEvents(){
+  const all=getAllEvents();
+  return all.filter(e=>goingList.has(eventId(e)));
+}
+
 function formatTime(t){
   if(!t)return'';
   const[h,m]=t.split(':').map(Number);
@@ -447,6 +688,41 @@ function isLiveNow(e){
   end.setHours(eh,em,0);
   if(end<=start)end.setDate(end.getDate()+1);
   return now>=start&&now<=end;
+}
+
+function getEventEndTime(e){
+  if(!e.date)return null;
+  const[sh,sm]=(e.start||'00:00').split(':').map(Number);
+  let start=new Date(e.date+'T00:00:00');
+  start.setHours(sh,sm,0);
+  if(!e.end){
+    // No end time — assume 3 hours
+    return new Date(start.getTime()+3*60*60*1000);
+  }
+  const[eh,em]=e.end.split(':').map(Number);
+  let end=new Date(e.date+'T00:00:00');
+  end.setHours(eh,em,0);
+  if(end<=start)end.setDate(end.getDate()+1);
+  return end;
+}
+
+function getEventStartTime(e){
+  if(!e.date||!e.start)return null;
+  const[sh,sm]=e.start.split(':').map(Number);
+  let start=new Date(e.date+'T00:00:00');
+  start.setHours(sh,sm,0);
+  return start;
+}
+
+function isEventPast(e){
+  const now=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));
+  const end=getEventEndTime(e);
+  if(!end)return false;
+  return now>end;
+}
+
+function isEventUpcoming(e){
+  return !isLiveNow(e)&&!isEventPast(e);
 }
 
 function escapeHtml(s){
@@ -504,10 +780,27 @@ function highlightFeatured(text,query){
 
 function renderTabs(){
   const tabs=document.getElementById('tabs');
-  tabs.innerHTML=DAYS.map(d=>{
-    const count=d.key==='all'?EVENTS.length:EVENTS.filter(e=>e.date===d.key).length;
-    return `<div class="tab${activeDay===d.key?' active':''}" data-day="${d.key}">${d.label}<span class="count">${count}</span></div>`;
+  let tabsHtml=DAYS.map(d=>{
+    if(d.key!=='all'){
+      const dayEvents=EVENTS.filter(e=>e.date===d.key);
+      const allPast=dayEvents.length>0&&dayEvents.every(e=>isEventPast(e));
+      if(allPast)return '';
+      const liveCount=dayEvents.filter(e=>isLiveNow(e)).length;
+      const activeCount=dayEvents.filter(e=>!isEventPast(e)).length;
+      const liveDot=liveCount>0?`<span class="tab-live"><span class="tab-live-dot"></span><span class="tab-live-count">${liveCount}</span></span>`:'';
+      return `<div class="tab${activeDay===d.key?' active':''}" data-day="${d.key}">${d.label}<span class="count">${activeCount}</span>${liveDot}</div>`;
+    }
+    const totalActive=EVENTS.filter(e=>!isEventPast(e)).length;
+    const liveNow=EVENTS.filter(e=>isLiveNow(e)).length;
+    const liveDot=liveNow>0?`<span class="tab-live"><span class="tab-live-dot"></span><span class="tab-live-count">${liveNow}</span></span>`:'';
+    return `<div class="tab${activeDay===d.key?' active':''}" data-day="${d.key}">${d.label}<span class="count">${totalActive}</span>${liveDot}</div>`;
   }).join('');
+  // Going tab — always show if user has picks
+  const goingCount=goingList.size;
+  if(goingCount>0||activeDay==='going'){
+    tabsHtml+=`<div class="tab going-tab${activeDay==='going'?' active':''}" data-day="going">Going<span class="count">${goingCount}</span></div>`;
+  }
+  tabs.innerHTML=tabsHtml;
   tabs.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
     activeDay=t.dataset.day;
     renderTabs();
@@ -526,28 +819,69 @@ function renderFilters(){
   }));
 }
 
+function renderEventCard(e,i,q,extraClasses,badgeHtml){
+  const catClass=CAT_COLORS[e.category]||'';
+  const live=isLiveNow(e);
+  const past=isEventPast(e);
+  const cls=['event-card'];
+  if(live)cls.push('is-live');
+  if(past)cls.push('is-past');
+  if(extraClasses)cls.push(extraClasses);
+  const eid=eventId(e);
+  const isGoing=goingList.has(eid);
+  const goingCount=attendanceCounts[eid]||0;
+  const countLabel=goingCount>0?`<span style="font-size:9px;color:var(--accent);font-weight:700;position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);white-space:nowrap">${goingCount}</span>`:'';
+
+  return `<div class="${cls.join(' ')}" data-idx="${i}">
+    <button class="going-btn${isGoing?' is-going':''}" data-eid="${eid}" onclick="event.stopPropagation();toggleGoing('${eid.replace(/'/g,"\\'")}')" title="${isGoing?'Remove from Going list':'Add to Going list'}">${isGoing?'✓':'+'}${countLabel}</button>
+    <div class="card-top">
+      <div class="event-name">${highlightFeatured(e.name,q)}${live?'<span class="live-badge"><span class="live-dot"></span>LIVE</span>':''}${badgeHtml||''}</div>
+      <div class="card-category ${catClass}">${e.category}</div>
+    </div>
+    <div class="event-time">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      ${timeRange(e)}
+    </div>
+    <a class="event-venue" href="https://maps.google.com/?q=${encodeURIComponent(e.venue+', Miami, FL')}" target="_blank" onclick="event.stopPropagation()" style="text-decoration:none;color:var(--text2)">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      ${highlightMatch(e.venue,q)} <span style="font-size:11px;color:var(--text3)">↗</span>
+    </a>
+    ${e.artists&&e.artists!=='TBD'?`<div class="event-artists"><strong>Artists:</strong> ${highlightFeatured(e.artists,q)}</div>`:''}
+    ${e.free?`<a class="free-badge" href="${e.rsvpUrl||'#'}" target="_blank" onclick="event.stopPropagation()">✦ Free RSVP</a>`:''}${!e.free&&e.ticketUrl?`<a class="ticket-link" href="${e.ticketUrl}" target="_blank" onclick="event.stopPropagation()">🎫 Tickets</a>`:''}${e.donateUrl?`<a class="donate-link" href="${e.donateUrl}" target="_blank" onclick="event.stopPropagation()">♡ Support Femme House</a>`:''}${e.radiate?`<span class="radiate-badge" onclick="event.stopPropagation()">☀️ Join on Radiate<span class="radiate-tooltip">Chat with everyone going to this event, find your crew, and see who else is there.<br><br><a href="https://www.radiatetheworld.com" target="_blank">Open Radiate</a> — 1M+ users across 500+ festivals</span></span>`:''}
+    ${e.credit?`<div style="font-size:10px;color:#555;margin-top:4px;font-style:italic">${highlightFeatured(e.credit,'')}</div>`:''}
+    <div class="card-details">
+      ${e.multi?`<div class="detail-row"><span class="detail-label">Series</span><span>${e.multi} (Day ${e.dayOf} of ${e.totalDays})</span></div>`:''}
+    </div>
+  </div>`;
+}
+
+function findNextUp(events){
+  const upcoming=events.filter(e=>isEventUpcoming(e)&&getEventStartTime(e));
+  if(upcoming.length===0)return null;
+  upcoming.sort((a,b)=>getEventStartTime(a)-getEventStartTime(b));
+  return upcoming[0];
+}
+
 function renderEvents(){
   const grid=document.getElementById('eventsGrid');
-  let filtered=EVENTS.filter(e=>{
+
+  // Going tab — special rendering
+  if(activeDay==='going'){
+    renderGoingTab(grid);
+    return;
+  }
+
+  let filtered=getAllEvents().filter(e=>{
     if(activeDay!=='all'&&e.date!==activeDay)return false;
     if(activeCategories.size>0&&!activeCategories.has(e.category))return false;
     if(searchQuery){
       const q=searchQuery.toLowerCase();
-      const searchable=`${e.name} ${e.artists} ${e.venue} ${e.category} ${e.hidden||''} ${e.credit||''} ${e.free?'free':''}`.toLowerCase();
+      const searchable=`${e.name} ${e.artists||''} ${e.venue} ${e.category} ${e.hidden||''} ${e.credit||''} ${e.free?'free':''}`.toLowerCase();
       if(!searchable.includes(q))return false;
     }
     return true;
   });
 
-  document.getElementById('eventCount').textContent=`${filtered.length} event${filtered.length!==1?'s':''}`;
-
-  if(filtered.length===0){
-    grid.innerHTML=`<div class="no-results"><h3>No events found</h3><p>Try a different search or filter</p></div>`;
-    return;
-  }
-
-  let html='';
-  let lastDate='';
   const dayNames={
     '2026-03-24':'Tuesday, March 24',
     '2026-03-25':'Wednesday, March 25',
@@ -557,37 +891,132 @@ function renderEvents(){
     '2026-03-29':'Sunday, March 29'
   };
 
-  filtered.forEach((e,i)=>{
-    if(activeDay==='all'&&e.date!==lastDate){
-      const dayCount=filtered.filter(ev=>ev.date===e.date).length;
+  const q=searchQuery;
+  let html='';
+
+  if(activeDay!=='all'){
+    // DAY TAB: only show live + upcoming, hide past
+    const active=filtered.filter(e=>!isEventPast(e));
+    const nextUp=findNextUp(active);
+
+    const activeCount=active.filter(e=>!isEventPast(e)).length;
+    document.getElementById('eventCount').textContent=`${activeCount} event${activeCount!==1?'s':''}`;
+
+    if(active.length===0){
+      grid.innerHTML=`<div class="all-ended"><h3>All events for this day have ended</h3><p>Check the All Events tab for the full archive</p></div>`;
+      return;
+    }
+
+    // Live first, then upcoming sorted by start time
+    const live=active.filter(e=>isLiveNow(e));
+    const upcoming=active.filter(e=>isEventUpcoming(e));
+    upcoming.sort((a,b)=>(getEventStartTime(a)||0)-(getEventStartTime(b)||0));
+
+    [...live,...upcoming].forEach((e,i)=>{
+      const isNext=nextUp&&e.name===nextUp.name&&e.date===nextUp.date&&!isLiveNow(e);
+      const badge=isNext?'<span class="next-badge">NEXT</span>':'';
+      html+=renderEventCard(e,i,q,'',badge);
+    });
+  } else {
+    // ALL EVENTS TAB: live at top, then upcoming by day, then past dimmed at bottom
+    const live=filtered.filter(e=>isLiveNow(e));
+    const upcoming=filtered.filter(e=>isEventUpcoming(e));
+    const past=filtered.filter(e=>isEventPast(e));
+    const nextUp=findNextUp(filtered);
+
+    const activeCount=live.length+upcoming.length;
+    document.getElementById('eventCount').textContent=`${activeCount} upcoming · ${past.length} past`;
+
+    if(activeCount===0&&past.length===0){
+      grid.innerHTML=`<div class="no-results"><h3>No events found</h3><p>Try a different search or filter</p></div>`;
+      return;
+    }
+
+    // Happening Now section
+    if(live.length>0){
+      html+=`<div class="section-divider now"><h3>Happening Now</h3><div class="line"></div></div>`;
+      live.forEach((e,i)=>{
+        html+=renderEventCard(e,i,q,'','');
+      });
+    }
+
+    // Upcoming section grouped by day
+    if(upcoming.length>0){
+      html+=`<div class="section-divider upcoming"><h3>Upcoming</h3><div class="line"></div></div>`;
+      let lastDate='';
+      upcoming.forEach((e,i)=>{
+        if(e.date!==lastDate){
+          const dayCount=upcoming.filter(ev=>ev.date===e.date).length;
+          html+=`<div class="day-divider"><h2>${dayNames[e.date]||e.date}</h2><div class="line"></div><div class="day-count">${dayCount} events</div></div>`;
+          lastDate=e.date;
+        }
+        const isNext=nextUp&&e.name===nextUp.name&&e.date===nextUp.date;
+        const badge=isNext?'<span class="next-badge">NEXT</span>':'';
+        html+=renderEventCard(e,i,q,'',badge);
+      });
+    }
+
+    // Past section (dimmed)
+    if(past.length>0){
+      html+=`<div class="section-divider past"><h3>Past Events</h3><div class="line"></div></div>`;
+      let lastDate='';
+      // Most recent past first
+      const sortedPast=[...past].sort((a,b)=>(getEventEndTime(b)||0)-(getEventEndTime(a)||0));
+      sortedPast.forEach((e,i)=>{
+        if(e.date!==lastDate){
+          const dayCount=sortedPast.filter(ev=>ev.date===e.date).length;
+          html+=`<div class="day-divider"><h2>${dayNames[e.date]||e.date}</h2><div class="line"></div><div class="day-count">${dayCount} events</div></div>`;
+          lastDate=e.date;
+        }
+        html+=renderEventCard(e,i,q,'','');
+      });
+    }
+  }
+
+  grid.innerHTML=html;
+  grid.querySelectorAll('.event-card').forEach(card=>{
+    card.addEventListener('click',()=>card.classList.toggle('expanded'));
+  });
+}
+
+// Going tab renderer
+function renderGoingTab(grid){
+  const going=getGoingEvents();
+  document.getElementById('eventCount').textContent=`${going.length} event${going.length!==1?'s':''} on your list`;
+
+  if(going.length===0){
+    grid.innerHTML=`<div class="going-empty"><h3>No events on your list yet</h3><p>Tap the <strong>+</strong> button on any event to add it to your Going list.<br>Your picks are saved on this device.</p></div>`;
+    return;
+  }
+
+  // Sort by date then start time
+  going.sort((a,b)=>{
+    if(a.date!==b.date)return a.date.localeCompare(b.date);
+    return (a.start||'').localeCompare(b.start||'');
+  });
+
+  const dayNames={'2026-03-24':'Tuesday, March 24','2026-03-25':'Wednesday, March 25','2026-03-26':'Thursday, March 26','2026-03-27':'Friday, March 27','2026-03-28':'Saturday, March 28','2026-03-29':'Sunday, March 29'};
+  const q='';
+  let html='';
+
+  // Share + Submit bar
+  html+=`<div class="share-bar">
+    <button class="share-btn" onclick="shareGoingList()">Share My List</button>
+    <button class="submit-event-btn" onclick="openSubmitModal()">+ Submit Event</button>
+    <span class="share-msg" id="shareMsg">Link copied!</span>
+  </div>`;
+
+  let lastDate='';
+  going.forEach((e,i)=>{
+    if(e.date!==lastDate){
+      const dayCount=going.filter(ev=>ev.date===e.date).length;
       html+=`<div class="day-divider"><h2>${dayNames[e.date]||e.date}</h2><div class="line"></div><div class="day-count">${dayCount} events</div></div>`;
       lastDate=e.date;
     }
-
-    const catClass=CAT_COLORS[e.category]||'';
-    const q=searchQuery;
-    const live=isLiveNow(e);
-
-    html+=`<div class="event-card${live?' is-live':''}" data-idx="${i}">
-      <div class="card-top">
-        <div class="event-name">${highlightFeatured(e.name,q)}${live?'<span class="live-badge"><span class="live-dot"></span>LIVE</span>':''}</div>
-        <div class="card-category ${catClass}">${e.category}</div>
-      </div>
-      <div class="event-time">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-        ${timeRange(e)}
-      </div>
-      <div class="event-venue">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        ${highlightMatch(e.venue,q)}
-      </div>
-      ${e.artists&&e.artists!=='TBD'?`<div class="event-artists"><strong>Artists:</strong> ${highlightFeatured(e.artists,q)}</div>`:''}
-      ${e.free?`<a class="free-badge" href="${e.rsvpUrl||'#'}" target="_blank" onclick="event.stopPropagation()">✦ Free RSVP</a>`:''}${!e.free&&e.ticketUrl?`<a class="ticket-link" href="${e.ticketUrl}" target="_blank" onclick="event.stopPropagation()">🎫 Tickets</a>`:''}${e.donateUrl?`<a class="donate-link" href="${e.donateUrl}" target="_blank" onclick="event.stopPropagation()">♡ Support Femme House</a>`:''}${e.radiate?`<span class="radiate-badge" onclick="event.stopPropagation()">☀️ Join on Radiate<span class="radiate-tooltip">Chat with everyone going to this event, find your crew, and see who else is there.<br><br><a href="https://www.radiatetheworld.com" target="_blank">Open Radiate</a> — 1M+ users across 500+ festivals</span></span>`:''}
-      ${e.credit?`<div style="font-size:10px;color:#555;margin-top:4px;font-style:italic">${highlightFeatured(e.credit,'')}</div>`:''}
-      <div class="card-details">
-        ${e.multi?`<div class="detail-row"><span class="detail-label">Series</span><span>${e.multi} (Day ${e.dayOf} of ${e.totalDays})</span></div>`:''}
-      </div>
-    </div>`;
+    const nextUp=findNextUp(going);
+    const isNext=nextUp&&e.name===nextUp.name&&e.date===nextUp.date&&!isLiveNow(e);
+    const badge=isNext?'<span class="next-badge">NEXT</span>':'';
+    html+=renderEventCard(e,i,q,'',badge);
   });
 
   grid.innerHTML=html;
@@ -595,6 +1024,81 @@ function renderEvents(){
     card.addEventListener('click',()=>card.classList.toggle('expanded'));
   });
 }
+
+// Share going list via URL
+function shareGoingList(){
+  const ids=[...goingList];
+  const encoded=encodeURIComponent(JSON.stringify(ids));
+  const url=window.location.origin+window.location.pathname+'?going='+encoded;
+  if(navigator.share){
+    navigator.share({title:'My MMW 2026 Schedule',text:'Check out my Miami Music Week picks!',url:url}).catch(()=>{});
+  }else{
+    navigator.clipboard.writeText(url).then(()=>{
+      const msg=document.getElementById('shareMsg');
+      msg.classList.add('show');
+      setTimeout(()=>msg.classList.remove('show'),2000);
+    }).catch(()=>{
+      prompt('Copy this link:',url);
+    });
+  }
+}
+
+// Submit event modal
+function openSubmitModal(){
+  document.getElementById('submitFormView').style.display='block';
+  document.getElementById('submitSuccessView').style.display='none';
+  document.getElementById('submitEventForm').reset();
+  document.getElementById('submitModal').classList.add('open');
+}
+document.getElementById('modalClose').addEventListener('click',()=>{
+  document.getElementById('submitModal').classList.remove('open');
+});
+document.getElementById('submitModal').addEventListener('click',(e)=>{
+  if(e.target===document.getElementById('submitModal'))document.getElementById('submitModal').classList.remove('open');
+});
+document.getElementById('submitEventForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const ev={
+    name:document.getElementById('se-name').value.trim(),
+    date:document.getElementById('se-date').value,
+    start:document.getElementById('se-start').value||'',
+    end:document.getElementById('se-end').value||'',
+    venue:document.getElementById('se-venue').value.trim(),
+    artists:document.getElementById('se-artists').value.trim(),
+    category:document.getElementById('se-category').value,
+    free:document.getElementById('se-free').value==='yes',
+    _custom:true,
+    _submitter:document.getElementById('se-submitter').value.trim()
+  };
+  const link=document.getElementById('se-link').value.trim();
+  if(link){if(ev.free){ev.rsvpUrl=link}else{ev.ticketUrl=link}}
+
+  // Add to custom events + going list
+  customEvents.push(ev);
+  saveCustomEvents();
+  goingList.add(eventId(ev));
+  saveGoingList();
+
+  // Send to review via email endpoint (Formspree or similar)
+  // For now, use mailto as fallback — works without any third-party service
+  const body=`New MMW 2026 Event Submission%0A%0AName: ${encodeURIComponent(ev.name)}%0ADate: ${ev.date}%0ATime: ${ev.start||'TBD'} - ${ev.end||'TBD'}%0AVenue: ${encodeURIComponent(ev.venue)}%0AArtists: ${encodeURIComponent(ev.artists||'TBD')}%0ACategory: ${ev.category}%0AFree: ${ev.free?'Yes':'No'}%0ALink: ${encodeURIComponent(link||'None')}%0ASubmitted by: ${encodeURIComponent(ev._submitter||'Anonymous')}`;
+  // Push to Supabase for review
+  submitEventToSupabase(ev);
+  // Also store in localStorage as backup
+  try{
+    const submissions=JSON.parse(localStorage.getItem('mmw-submissions')||'[]');
+    submissions.push({...ev,_submitted:new Date().toISOString()});
+    localStorage.setItem('mmw-submissions',JSON.stringify(submissions));
+  }catch(err){}
+
+  // Show success
+  document.getElementById('submitFormView').style.display='none';
+  document.getElementById('submitSuccessView').style.display='block';
+  renderTabs();
+  renderEvents();
+  // Switch to going tab after a moment
+  setTimeout(()=>{activeDay='going';renderTabs();renderEvents()},100);
+});
 
 // Search
 const searchInput=document.getElementById('searchInput');
@@ -614,13 +1118,30 @@ searchClear.addEventListener('click',()=>{
   renderEvents();
 });
 
+// Auto-select today's tab during MMW
+(function(){
+  const now=new Date(new Date().toLocaleString('en-US',{timeZone:'America/New_York'}));
+  const today=now.toISOString().split('T')[0];
+  const mmwDay=DAYS.find(d=>d.key===today&&d.key!=='all');
+  if(mmwDay){
+    const dayEvents=EVENTS.filter(e=>e.date===today);
+    const allPast=dayEvents.length>0&&dayEvents.every(e=>isEventPast(e));
+    if(!allPast)activeDay=today;
+  }
+})();
+
 // Init
 try{
   renderTabs();
   renderFilters();
   renderEvents();
-  // Refresh live badges every 60 seconds
-  setInterval(()=>{try{renderEvents()}catch(e){}},60000);
+  // Sync going list from Supabase + load attendance counts
+  syncGoingFromSupabase();
+  loadAttendanceCounts();
+  // Refresh live badges + time-aware filtering every 60 seconds
+  setInterval(()=>{try{renderTabs();renderEvents()}catch(e){}},60000);
+  // Refresh attendance counts every 5 minutes
+  setInterval(()=>{try{loadAttendanceCounts()}catch(e){}},300000);
 }catch(e){
   document.getElementById('eventsGrid').innerHTML='<div class="no-results"><h3>Something went wrong loading events</h3><p>Try refreshing the page. If the issue persists, text Caleb.</p></div>';
 }
