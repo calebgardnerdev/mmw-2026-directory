@@ -3,3 +3,8 @@
 og-v1.jpeg
 og-v2.jpeg
 og-v3.jpeg
+.agents/
+.crush/
+.goose/
+.understand-anything/
+skills-lock.json

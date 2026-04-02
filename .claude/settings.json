@@ -1,0 +1,58 @@
+{
+  "enabledPlugins": {
+    "understand-anything@understand-anything": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); cmd=$(echo \"$input\" | jq -r '.tool_input.command // empty'); if echo \"$cmd\" | grep -qE 'git\\s+push.*main'; then echo 'WARNING: You are about to push to main — this is Caleb production repo. Consider pushing to staging instead.' >&2; fi; exit 0"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); cmd=$(echo \"$input\" | jq -r '.tool_input.command // empty'); output=$(echo \"$input\" | jq -r '.tool_output.stdout // empty'); if echo \"$cmd\" | grep -qE '^vercel deploy'; then url=$(echo \"$output\" | grep -oE 'https://[^ ]*\\.vercel\\.app' | tail -1); [ -n \"$url\" ] && echo \"Preview deployed: $url\"; fi; exit 0"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); cmd=$(echo \"$input\" | jq -r '.tool_input.command // empty'); if echo \"$cmd\" | grep -qE 'git\\s+commit'; then echo 'MEMORY_CHECKPOINT: A commit was just made. Evaluate if any decisions, preferences, or project context from this work should be saved to .claude/contributors/ profiles or _shared.md. Dispatch the memory-keeper agent if there is meaningful context to persist.'; fi; exit 0"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "marker=\"/tmp/claude-memory-mmw-$(whoami)\"; now=$(date +%s); if [ -f \"$marker\" ]; then last=$(cat \"$marker\"); elapsed=$((now - last)); if [ $elapsed -lt 1200 ]; then exit 0; fi; fi; echo \"$now\" > \"$marker\"; echo 'MEMORY_CHECKPOINT: 20+ minutes of active work. Review this session for memory-worthy content: new preferences, decisions, workflow changes, or contributor observations. Update .claude/contributors/ profiles and _shared.md if anything meaningful was established. Skip if nothing notable happened.'"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "user=$(whoami); profile=\".claude/contributors/${user}.md\"; if [ -f \"$profile\" ]; then echo \"CONTRIBUTOR_LOADED: $user — profile at $profile\"; else echo \"NEW_CONTRIBUTOR: $user — no profile found at $profile. After this session, create one based on observed preferences and skills.\"; fi; date +%s > \"/tmp/claude-memory-mmw-${user}\""
+          }
+        ]
+      }
+    ]
+  }
+}
