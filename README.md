@@ -2,7 +2,7 @@
 
 **Live site:** [mmw-2026-directory.vercel.app](https://mmw-2026-directory.vercel.app)
 
-A curated, searchable event directory for Miami Music Week 2026 (March 24–29). 176 events across 6 days, filterable by category and day. Built and maintained by Caleb Gardner / CMG Inc.
+A curated, searchable event directory for Miami Music Week 2026 (March 24–29). 198 events across 6 days, filterable by category and day. Built and maintained by Caleb Gardner / CMG Inc.
 
 ---
 
@@ -38,7 +38,7 @@ The entire application lives in `index.html` — no build step, no bundler, no d
 
 - **HTML structure** (lines 1–200): Header, search bar, filter chips, day tabs, event grid, footer
 - **CSS** (lines 25–160): Dark theme, responsive grid (1/2/3 columns), card system, category colors, animations
-- **Event data** (line 203+): `EVENTS` array — 176 JSON objects with all event metadata
+- **Event data** (line 203+): `EVENTS` array — 198 JSON objects with all event metadata
 - **JavaScript** (lines 400–629): Rendering, search, filtering, live-now detection, featured artist highlighting
 
 ### Data Model
